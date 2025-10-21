@@ -291,6 +291,7 @@ MonoBehaviour:
   - {fileID: 320771876266697745, guid: 7d2559f4b591c754cb91af0718870e54, type: 3}
   _cameraMover: {fileID: 519420033}
   _playerCollisions: {fileID: 2136018673}
+  _playerInfoController: {fileID: 2136018672}
 --- !u!114 &113967867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2624,7 +2625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5c1b8b6256ff8479159bd68d84445b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initMoney: 10
+  _initReward: 0
   _initHP: 50
   _maxHP: 100
   _moneyView: {fileID: 1150296141}

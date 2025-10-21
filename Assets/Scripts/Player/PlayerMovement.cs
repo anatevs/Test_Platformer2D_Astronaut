@@ -125,15 +125,15 @@ namespace Gameplay
 
             else
             {
-                MoveHor(0);
+                _rb.constraints = RigidbodyConstraints2D.FreezePosition;
             }
         }
 
         public void SetToStartPos()
         {
-            gameObject.SetActive(false);
             transform.position = _startPos;
-            gameObject.SetActive(true);
+            _rb.constraints = RigidbodyConstraints2D.None;
+            _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
         public void MakeJump()

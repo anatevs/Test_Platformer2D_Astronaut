@@ -6,8 +6,10 @@ namespace Gameplay
 {
     public class PlayerInfoController : MonoBehaviour
     {
+        public event Action OnHPEmpty;
+
         [SerializeField]
-        private float _initMoney = 5;
+        private float _initReward = 0;
 
         [SerializeField]
         private int _initHP = 50;
@@ -21,7 +23,7 @@ namespace Gameplay
         [SerializeField]
         private HPView _hpView;
 
-        private RewardStorage _moneyStorage;
+        private RewardStorage _rewardStorage;
 
         private RewardController _moneyController;
 
@@ -31,9 +33,9 @@ namespace Gameplay
 
         private void OnEnable()
         {
-            _moneyStorage = new RewardStorage(_initMoney);
+            _rewardStorage = new RewardStorage(_initReward);
 
-            _moneyController = new RewardController(_moneyStorage, _moneyView);
+            _moneyController = new RewardController(_rewardStorage, _moneyView);
 
             _hpStorage = new HPStorage(_initHP, _maxHP);
 
@@ -42,12 +44,28 @@ namespace Gameplay
 
         public void AddReward(float cost)
         {
-            _moneyStorage.Add(cost);
+            _rewardStorage.Add(cost);
         }
 
         public void ChangeHP(int addHP)
         {
             _hpStorage.AddHP(addHP);
+
+            if (_hpStorage.HP == 0)
+            {
+                OnHPEmpty?.Invoke();
+            }
+        }
+
+        public void ResetLevel()
+        {
+            _rewardStorage.ResetLevel();
+        }
+
+        public void ResetGame()
+        {
+            _rewardStorage.Set(_initReward);
+            _hpStorage.SetHP(_initHP);
         }
     }
 

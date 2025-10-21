@@ -19,6 +19,9 @@ namespace GameManagement
 		[SerializeField]
 		private PlayerCollisions _playerCollisions;
 
+        [SerializeField]
+        private PlayerInfoController _playerInfoController;
+
         private PlayerMovement _playerMovement;
 
 		private Level _currentLevel;
@@ -33,11 +36,15 @@ namespace GameManagement
         private void OnEnable()
         {
 			_playerCollisions.OnExitPortalCollided += SetNextLevel;
+
+            _playerInfoController.OnHPEmpty += Restart;
         }
 
         private void OnDisable()
         {
             _playerCollisions.OnExitPortalCollided -= SetNextLevel;
+
+            _playerInfoController.OnHPEmpty -= Restart;
         }
 
         public void StopCurrentLevel()
@@ -62,6 +69,8 @@ namespace GameManagement
         public void RestartCurrentLevel()
 		{
 			SetLevel(_currentLevelIndex);
+
+            _playerInfoController.ResetLevel();
 		}
 
 		public void Restart()
@@ -69,14 +78,17 @@ namespace GameManagement
 			_currentLevelIndex = 0;
 
 			SetLevel(_currentLevelIndex);
+
+            _playerInfoController.ResetGame();
 		}
 
         private void SetLevel(int index)
         {
             if (_currentLevel != null)
             {
+                StopCurrentLevel();
                 _currentLevel.gameObject.SetActive(false);
-                Destroy(_currentLevel);
+                GameObject.Destroy(_currentLevel.gameObject);
             }
 
             _currentLevel = Instantiate(_levelPrefabs[index]);

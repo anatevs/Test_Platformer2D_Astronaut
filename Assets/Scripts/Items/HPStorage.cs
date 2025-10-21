@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Gameplay
@@ -24,8 +25,22 @@ namespace Gameplay
         public void AddHP(int addHP)
         {
             var newHP = Mathf.Min(_hp + addHP, _maxHP);
+            if (newHP < 0)
+            {
+                newHP = 0;
+            }
 
             _hp = newHP;
+
+            OnHPChanged?.Invoke(_hp);
+        }
+
+        public void SetHP(int newHP)
+        {
+            var newHPVal = Mathf.Min(newHP, _maxHP);
+            var addHP = newHPVal - _hp;
+
+            _hp = newHPVal;
 
             OnHPChanged?.Invoke(_hp);
         }

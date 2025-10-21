@@ -41,8 +41,6 @@ namespace GameManagement
 
             if (state == GameState.LOST)
             {
-                _levelManager.StopCurrentLevel();
-
                 _lostWindow.Show();
             }
         }
