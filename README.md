@@ -15,3 +15,13 @@
 
 
 В игре 2 уровня, которые заданы через префабы.
+
+Основной геймплей:
+
+![Movie_001(1)](https://github.com/user-attachments/assets/e7ec00fd-35da-466b-a7c8-1dd0d5c77487)
+
+Проигрыш и перезапуск уровня:
+
+![Movie_001(1)(1)](https://github.com/user-attachments/assets/44c1ba13-9d3e-4735-bfb1-365340e36180)
+
+
